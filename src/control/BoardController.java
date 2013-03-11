@@ -14,6 +14,16 @@ import service.BoardService;
 
 @Controller
 public class BoardController {
+	
+	
+	/*
+	 * 
+	 * 이것은 줘뚸 크레용
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	private BoardService bservice;
 
 	public BoardService getBservice() {
