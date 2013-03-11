@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import service.BoardService;
 //ㅁㄴㅇㄻㄴㅇㄹ이거이거이거 내가 수정 성현
-
+//ㅁㄴㅇㄻㄴㅇㄻㄹㅇㄴㅁㄹㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㅇㄹㄴㅁㅇㄹㄴㅁㄹㅇㅁㄴㄻㅇㄴ
 
 @Controller
 public class BoardController {
