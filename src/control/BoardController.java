@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.BoardService;
+//ㅁㄴㅇㄻㄴㅇㄹ이거이거이거 내가 수정 성현
+
 
 @Controller
 public class BoardController {
