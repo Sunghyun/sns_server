@@ -11,10 +11,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.BoardService;
+//ㅁㄴㅇㄻㄴㅇㄹ이거이거이거 내가 수정 성현
+//ㅁㄴㅇㄻㄴㅇㄻㄹㅇㄴㅁㄹㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㅇㄹㄴㅁㅇㄹㄴㅁㄹㅇㅁㄴㄻㅇㄴ
 
 /////// 야성야성
 @Controller
 public class BoardController {
+	
+	
+	/*
+	 * 
+	 * 이것은 줘뚸 크레용
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	private BoardService bservice;
 
 	public BoardService getBservice() {
