@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"  
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Friend">
+
+<!-- 멤버정보 -->
+	<resultMap id="MemberResult" class="model.Member">
+		<result column="ID" property="id" />
+		<result column="PWD" property="pwd" />
+		<result column="NAME" property="name" />
+		<result column="sg" property="sg" />
+		<result column="address" property="address" />
+		<result column="tel" property="tel" />
+	</resultMap>
+	
+	
+	<resultMap id="FrInfoResult" class="model.FrInfo">
+		<result column="num" property="num" />
+		<result column="fr_id" property="fr_id" />
+		<result column="info1" property="info1" />
+	</resultMap>
+	
+	
+	<select id="getFr" parameterClass="java.util.Map" resultMap="FrInfoResult">
+		select num, fr_id, info1 from friend_$id$ where fr_id=#fr_id#
+	</select>
+	
+	<select id="getFrList" parameterClass="String" resultMap="FrInfoResult">
+		select * from friend_$id$
+	</select>
+
+	<select id="getFrIdList" parameterClass="String" resultClass="String">
+		select fr_id from friend_$id$
+	</select>
+	
+	<select id="getFrYesIdList" parameterClass="String" resultClass="String">
+		select fr_id from friend_$id$ where info1='yes'
+	</select>
+
+<!-- 	<select id="sgList" parameterClass="java.util.Map" resultMap="MemberResult"> -->
+<!-- 		<![CDATA[ -->
+<!-- 			select * from sns_member where sg=#sg# and id<>#id# -->
+<!-- 		]]> -->
+<!-- 			<isNotEmpty property="idList" prepend="AND"> -->
+<!-- 				id not in($idList$) -->
+<!-- 			</isNotEmpty> -->
+		
+<!-- 	</select> -->
+
+<!-- 꺽쇠를 쓰기위해 CDATA사용 -->
+<!-- 알수도 있는 사람 띄워주는 sql -->
+	<select id="sgList" parameterClass="java.util.Map" resultMap="MemberResult">
+		<![CDATA[
+			select * from sns_member 
+			where sg=#sg# and id<>#id# 
+			and id not in(select fr_id from friend_$id$)
+		]]>		
+	</select>
+<!-- 내가 누군가를 친구로 요청할 때 -->
+	<insert id="reqFr1" parameterClass="java.util.Map">
+		insert into friend_$id$(num,fr_id,info1) values(friend_$id$_seq.nextval, #fr_id#,'my')
+	</insert>
+	
+<!-- 상대방의 테이블에 생김 -->
+	<insert id="reqFr2" parameterClass="java.util.Map">
+		insert into friend_$fr_id$(num,fr_id,info1) values(friend_$fr_id$_seq.nextval, #id#,'no')
+	</insert>
+
+<!-- 친구 수락 시 yes로 바꿈 -->
+	<update id="addFr1" parameterClass="java.util.Map">
+		update friend_$id$ set info1='yes' where fr_id=#fr_id#
+	</update>
+
+<!-- 친구 수락 시 yes로 바꿈 -->
+	<update id="addFr2" parameterClass="java.util.Map">
+		update friend_$fr_id$ set info1='yes' where fr_id=#id#
+	</update>
+
+<!-- 내가 친구요청을 취소 했거나 친구가 거절 시 지움 -->
+	<delete id="delFr1" parameterClass="java.util.Map">
+		delete friend_$id$ where fr_id=#fr_id#
+	</delete>
+
+<!-- 친구 거절 시 지움 -->	
+	<delete id="delFr2" parameterClass="java.util.Map">
+		delete friend_$fr_id$ where fr_id=#id#
+	</delete>
+
+</sqlMap>

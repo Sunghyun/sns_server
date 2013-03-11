@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"  
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+
+	<resultMap id="ArticleResult" class="model.Article">
+		<result column="num" property="num" />
+		<result column="writer_id" property="writer_id" />
+		<result column="content" property="content" />
+	</resultMap>
+
+	<select id="select" parameterClass="String" resultMap="ArticleResult">
+		select * from sns_board 
+		where writer_id=#id# or writer_id in(select fr_id from friend_$id$) 
+		order by num
+	</select>
+
+	<insert id="insert" parameterClass="model.Article">
+		insert into sns_board values(sns_board_seq.nextval, #writer_id#, #content#)
+	</insert>
+
+	<update id="update" parameterClass="model.Article">
+		update sns_board set content=#content# where num=#num#
+	</update>
+
+	<delete id="delete" parameterClass="int">
+		delete sns_board where num=#num#
+	</delete>
+
+</sqlMap>
+
+
+

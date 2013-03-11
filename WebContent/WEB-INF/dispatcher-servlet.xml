@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 뷰 리졸버 등록 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/sns/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 데이터 소스 등록 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver" 
+		p:url="jdbc:oracle:thin:@localhost:1521:ORCL"
+		p:username="scott"
+		p:password="tiger">
+	</bean>
+
+	<!-- iba test -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
+		p:dataSource-ref="dataSource" p:configLocation="/WEB-INF/SqlMapConfig.xml" />
+
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate"
+		p:sqlMapClient-ref="sqlMapClient" />
+
+	<!-- 회원관리 컨트롤러 객체 등록 -->
+	<bean id="memberController" class="control.MemberController"
+	p:service-ref="memService"/>
+	
+	<!-- 회원관리 dao 객체 등록 -->
+	<bean id="memDao" class="dao.MemberDao" p:sm-ref="sqlMapClientTemplate" />
+
+	<!-- 회원관리 서비스 객체 등록 -->
+	<bean name="memService" class="service.MemberServiceImpl" p:dao-ref="memDao"/>		
+
+	<!-- validator 객체 등록 -->
+	<bean name="memValidator" class="validator.MemberValidator" />
+	
+	<!-- 에러 메시지 용 메시지 객체 등록 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages.validation</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
+

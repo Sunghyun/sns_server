@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"  
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Member">
+
+	<resultMap id="MemberResult" class="model.Member">
+		<result column="ID" property="id" />
+		<result column="PWD" property="pwd" />
+		<result column="NAME" property="name" />
+		<result column="sg" property="sg" />
+		<result column="address" property="address" />
+		<result column="tel" property="tel" />
+	</resultMap>
+
+	<insert id="insert" parameterClass="model.Member">
+		insert into sns_member
+		values(#id#, #pwd#, #name#, #sg#, #address#, #tel#)
+	</insert>
+
+	<statement id="createTab" parameterClass="String">
+		create table
+		friend_$id$(
+		num number primary key,
+		fr_id varchar2(20) not null,
+		info1
+		varchar2(10)
+		)
+	</statement>
+
+	<statement id="createSeq" parameterClass="String">
+		create sequence
+		friend_$id$_seq
+		increment by 1
+		start with 1
+		maxvalue 9999
+		nocache
+		nocycle
+	</statement>
+
+	<update id="update" parameterClass="model.Member">
+		update sns_member
+		set
+		pwd=#pwd#, sg=#sg#, address=#address#, tel=#tel#
+		where id=#id#
+	</update>
+
+	<delete id="delete" parameterClass="String">
+		delete sns_member
+		where
+		id=#id#
+	</delete>
+
+	<statement id="dropTab" parameterClass="String">
+		drop table friend_$id$
+	</statement>
+
+	<statement id="dropSeq" parameterClass="String">
+		drop sequence
+		friend_$id$_seq
+	</statement>
+
+	<select id="getMember" parameterClass="String" resultMap="MemberResult">
+		select
+		* from sns_member where id=#id#
+	</select>
+
+	<select id="login" parameterClass="model.Member" resultMap="MemberResult">
+		select * from sns_member where id=#id# and pwd=#pwd#
+	</select>
+
+</sqlMap>
+
+
+
+
+
+
+
+
+
+
+
+
