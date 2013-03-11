@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import service.BoardService;
 
+/////// 具己具己
 @Controller
 public class BoardController {
 	private BoardService bservice;
