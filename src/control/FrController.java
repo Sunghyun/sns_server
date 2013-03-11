@@ -16,7 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import service.FrService;
 import service.MemberService;
-//testest
+////testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testesttestest
+
 @Controller
 public class FrController {
 	private FrService fservice;
