@@ -12,7 +12,7 @@
 
 	<select id="select" parameterClass="String" resultMap="ArticleResult">
 		select * from sns_board 
-		where writer_id=#id# or writer_id in(select fr_id from friend_$id$) 
+		where writer_id=#id# or writer_id in(select fr_id from friend_$id$ where info1='yes') 
 		order by num
 	</select>
 

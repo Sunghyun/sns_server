@@ -58,30 +58,30 @@
 		</tr>
 		<tr>
 			<td rowspan="3"><a href="/sns_server/writeForm.do">글쓰기</a><br />
-<!-- 				<table border="1"> -->
-<!-- 					<tr> -->
-<!-- 						<th>글번호</th> -->
-<!-- 						<th>작성자</th> -->
-<!-- 						<th style="width: 300px;">내용</th> -->
-<!-- 						<th>편집</th> -->
-<!-- 					</tr> -->
-<%-- 					<c:forEach var="a" items="${articles}"> --%>
-<!-- 						<tr> -->
-<%-- 							<td>${a.num}</td> --%>
-<%-- 							<td>${a.writer_id}</td> --%>
-<%-- 							<td>${a.content}</td> --%>
-<%-- 							<td><c:if test="${a.writer_id == sessionScope.id }"> --%>
-<!-- 									<form method="post"> -->
-<%-- 										<input type="hidden" name="num" value="${a.num}" /> <input --%>
-<%-- 											type="hidden" name="writer_id" value="${a.writer_id}" /> <input --%>
-<%-- 											type="hidden" name="content" value="${a.content}" /> <input --%>
-<!-- 											type="button" value="수정" onclick="d(1, this.form)" /> <input -->
-<!-- 											type="button" value="삭제" onclick="d(2, this.form)" /> -->
-<!-- 									</form> -->
-<%-- 								</c:if></td> --%>
-<!-- 						</tr> -->
-<%-- 					</c:forEach> --%>
-<!-- 				</table> -->
+				<table border="1">
+					<tr>
+						<th>글번호</th>
+						<th>작성자</th>
+						<th style="width: 300px;">내용</th>
+						<th>편집</th>
+					</tr>
+					<c:forEach var="a" items="${articles}">
+						<tr>
+							<td>${a.num}</td>
+							<td>${a.writer_id}</td>
+							<td>${a.content}</td>
+							<td><c:if test="${a.writer_id == sessionScope.id }">
+									<form method="post">
+										<input type="hidden" name="num" value="${a.num}" /> <input
+											type="hidden" name="writer_id" value="${a.writer_id}" /> <input
+											type="hidden" name="content" value="${a.content}" /> <input
+											type="button" value="수정" onclick="d(1, this.form)" /> <input
+											type="button" value="삭제" onclick="d(2, this.form)" />
+									</form>
+								</c:if></td>
+						</tr>
+					</c:forEach>
+				</table>
 				
 				</td>
 			<td>

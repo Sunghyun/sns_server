@@ -14,14 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import service.BoardService;
 import service.FrService;
 import service.MemberService;
-////testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testest//testesttestest
+
 
 @Controller
 public class FrController {
 	private FrService fservice;
 	private MemberService mservice;
+	private BoardService bservice;
+
+	public BoardService getBservice() {
+		return bservice;
+	}
+
+	public void setBservice(BoardService bservice) {
+		this.bservice = bservice;
+	}
 
 	public FrService getFservice() {
 		return fservice;
@@ -56,11 +66,11 @@ public class FrController {
 			fList = fservice.getFrList(id);
 			idList = fservice.getFrIdList(id);
 			idList.add(id);
-//			articles = bservice.select(idList);
+			articles = bservice.select(idList);
 		}
 		mav.addObject("data", data);
 		mav.addObject("fdata", fList);
-//		mav.addObject("articles", articles);
+		mav.addObject("articles", articles);
 		return mav;
 	}
 

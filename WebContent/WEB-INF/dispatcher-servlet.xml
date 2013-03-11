@@ -30,15 +30,19 @@
 	<bean id="memberController" class="control.MemberController" p:service-ref="memService"/>
 	
 	<bean id="frController" class="control.FrController"
-	p:fservice-ref="frService" p:mservice-ref="memService"/>
+	p:fservice-ref="frService" p:mservice-ref="memService" p:bservice-ref="boardService"/>
+	
+	<bean id="boardController" class="control.BoardController" p:bservice-ref="boardService"/>
 	
 	<!-- dao 객체 등록 -->
 	<bean id="memDao" class="dao.MemberDao" p:sm-ref="sqlMapClientTemplate" />
 	<bean id="frDao" class="dao.FrDaoImpl" p:sm-ref="sqlMapClientTemplate" />
+	<bean id="boardDao" class="dao.BoardDaoImpl" p:sm-ref="sqlMapClientTemplate" />
 
 	<!-- 서비스 객체 등록 -->
 	<bean name="memService" class="service.MemberServiceImpl" p:dao-ref="memDao"/>
-	<bean name="frService" class="service.FrServiceImpl" p:dao-ref="frDao"/>		
+	<bean name="frService" class="service.FrServiceImpl" p:dao-ref="frDao"/>
+	<bean name="boardService" class="service.BoardServiceImpl" p:dao-ref="boardDao"/>		
 
 	<!-- validator 객체 등록 -->
 	<bean name="memValidator" class="validator.MemberValidator" />
