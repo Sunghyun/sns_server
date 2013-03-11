@@ -9,6 +9,7 @@ import model.Article;
 import model.FrInfo;
 import model.Member;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,23 +17,27 @@ import org.springframework.web.servlet.ModelAndView;
 import service.FrService;
 import service.MemberService;
 
+@Controller
 public class FrController {
 	private FrService fservice;
 	private MemberService mservice;
-	
+
 	public FrService getFservice() {
 		return fservice;
 	}
+
 	public void setFservice(FrService fservice) {
 		this.fservice = fservice;
 	}
+
 	public MemberService getMservice() {
 		return mservice;
 	}
+
 	public void setMservice(MemberService mservice) {
 		this.mservice = mservice;
 	}
-	
+
 	@RequestMapping(value = "/list.do")
 	public ModelAndView list(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("list");
@@ -47,14 +52,14 @@ public class FrController {
 			id = (String) session.getAttribute("id");
 			sg = mservice.select(id).getSg();
 			data = fservice.getFr_sgList(sg, id);
-			fList = fservice.getFrList(id);			//모든사람들 정보
-			idList = fservice.getFrIdList(id);		//
+			fList = fservice.getFrList(id);
+			idList = fservice.getFrIdList(id);
 			idList.add(id);
 //			articles = bservice.select(idList);
 		}
 		mav.addObject("data", data);
 		mav.addObject("fdata", fList);
-		mav.addObject("articles", articles);
+//		mav.addObject("articles", articles);
 		return mav;
 	}
 
@@ -136,8 +141,4 @@ public class FrController {
 		mav.addObject("m", m);
 		return mav;
 	}
-	
-	
-	
-	
 }

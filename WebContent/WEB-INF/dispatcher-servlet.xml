@@ -19,22 +19,26 @@
 		p:password="tiger">
 	</bean>
 
-	<!-- iba test -->
+	<!-- ibatis -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
 		p:dataSource-ref="dataSource" p:configLocation="/WEB-INF/SqlMapConfig.xml" />
 
 	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate"
 		p:sqlMapClient-ref="sqlMapClient" />
 
-	<!-- 회원관리 컨트롤러 객체 등록 -->
-	<bean id="memberController" class="control.MemberController"
-	p:service-ref="memService"/>
+	<!-- 컨트롤러 객체 등록 -->
+	<bean id="memberController" class="control.MemberController" p:service-ref="memService"/>
 	
-	<!-- 회원관리 dao 객체 등록 -->
+	<bean id="frController" class="control.FrController"
+	p:fservice-ref="frService" p:mservice-ref="memService"/>
+	
+	<!-- dao 객체 등록 -->
 	<bean id="memDao" class="dao.MemberDao" p:sm-ref="sqlMapClientTemplate" />
+	<bean id="frDao" class="dao.FrDaoImpl" p:sm-ref="sqlMapClientTemplate" />
 
-	<!-- 회원관리 서비스 객체 등록 -->
-	<bean name="memService" class="service.MemberServiceImpl" p:dao-ref="memDao"/>		
+	<!-- 서비스 객체 등록 -->
+	<bean name="memService" class="service.MemberServiceImpl" p:dao-ref="memDao"/>
+	<bean name="frService" class="service.FrServiceImpl" p:dao-ref="frDao"/>		
 
 	<!-- validator 객체 등록 -->
 	<bean name="memValidator" class="validator.MemberValidator" />

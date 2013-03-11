@@ -64,7 +64,9 @@ public class MemberController {
 	public ModelAndView login(@RequestParam("id") String id, 
 			@RequestParam("pwd") String pwd, HttpSession session) {
 		String query = null;
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();
+		System.out.println(id);
+		System.out.println(pwd);
 		if(service.login(id, pwd)){
 			session.setAttribute("id", id);
 			query = "list.do";
