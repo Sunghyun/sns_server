@@ -11,5 +11,7 @@ public interface FrService {
 	ArrayList getFrIdList(String id);
 	ArrayList getFrList(String id);
 	void delFr(String id, String fr_id);
+	
+	ArrayList getFrList_del(String id);
 
 }

@@ -27,6 +27,10 @@
 	<delete id="delete" parameterClass="int">
 		delete sns_board where num=#num#
 	</delete>
+	
+	<delete id="delete_id" parameterClass="String">
+		delete sns_board where writer_id=#writer_id#
+	</delete>
 
 </sqlMap>
 

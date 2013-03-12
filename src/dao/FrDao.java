@@ -8,7 +8,7 @@ public interface FrDao {
 	ArrayList getFr_sgList(int sg, String id);
 	void reqFr(String id, String fr_id);
 	void addFr(String id, String fr_id);
-	ArrayList getFrIdList(String id);
+	ArrayList getFrIdList(String id); // 친구 아이디 값을 가져옴
 	ArrayList getFrYesIdList(String id);
 	ArrayList getFrList(String id);
 	void delFr(String id, String fr_id);

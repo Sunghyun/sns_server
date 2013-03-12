@@ -50,4 +50,9 @@ public class FrServiceImpl implements FrService{
 		return dao.getFrYesIdList(id);
 	}
 
+	@Override
+	public ArrayList getFrList_del(String id) {
+		return dao.getFrIdList(id);
+	}
+
 }

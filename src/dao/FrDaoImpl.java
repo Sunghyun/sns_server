@@ -70,6 +70,7 @@ public class FrDaoImpl implements FrDao {
 	@Override
 	public ArrayList getFrIdList(String id) {
 		//로그인한 사람의 id 목록
+		System.out.println("DaoImpl======================================="+id);
 		return (ArrayList<String>) sm.queryForList("Friend.getFrIdList", id);
 	}
 

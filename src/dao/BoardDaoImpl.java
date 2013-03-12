@@ -51,6 +51,12 @@ public class BoardDaoImpl implements BoardDao {
 		return (ArrayList<Article>)sm.queryForList("Board.select", id);
 	}
 
+	@Override
+	public void delete_id(String writer_id) {
+		sm.delete("Board.delete_id", writer_id);
+		
+	}
+
 //	private Connection conn = null;
 //	private PreparedStatement pstmt = null;
 //	private DataSource dataSource;
