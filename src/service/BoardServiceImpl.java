@@ -40,4 +40,9 @@ public class BoardServiceImpl implements BoardService {
 		return dao.select(idList);
 	}
 
+	@Override
+	public void delete_id(String writer_id) {
+		dao.delete_id(writer_id);
+	}
+
 }

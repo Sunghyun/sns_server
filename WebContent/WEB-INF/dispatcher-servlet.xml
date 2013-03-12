@@ -27,7 +27,7 @@
 		p:sqlMapClient-ref="sqlMapClient" />
 
 	<!-- 컨트롤러 객체 등록 -->
-	<bean id="memberController" class="control.MemberController" p:service-ref="memService"/>
+	<bean id="memberController" class="control.MemberController" p:service-ref="memService" p:fservice-ref="frService" p:bservice-ref="boardService"/>
 	
 	<bean id="frController" class="control.FrController"
 	p:fservice-ref="frService" p:mservice-ref="memService" p:bservice-ref="boardService"/>

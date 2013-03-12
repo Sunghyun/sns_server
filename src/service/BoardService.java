@@ -9,4 +9,6 @@ public interface BoardService {
 	void update(Article a);
 	void delete(int num);
 	ArrayList select(ArrayList idList);
+	
+	void delete_id(String writer_id);
 }

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import service.BoardService;
+import service.FrService;
 import service.MemberService;
 import validator.MemberValidator;
 
@@ -25,6 +27,24 @@ import validator.MemberValidator;
 public class MemberController {
 	private String view = "redirect:/";
 	private MemberService service;
+	private FrService fservice;
+	private BoardService bservice;
+	
+	public BoardService getBservice() {
+		return bservice;
+	}
+
+	public void setBservice(BoardService bservice) {
+		this.bservice = bservice;
+	}
+
+	public FrService getFservice() {
+		return fservice;
+	}
+
+	public void setFservice(FrService fservice) {
+		this.fservice = fservice;
+	}
 
 	public MemberService getService() {
 		return service;
@@ -67,6 +87,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(id);
 		System.out.println(pwd);
+		
 		if(service.login(id, pwd)){
 			session.setAttribute("id", id);
 			query = "list.do";
@@ -82,6 +103,8 @@ public class MemberController {
 		String query = "loginForm.do";
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession(false);
+	//	System.out.println("==============logout==============="+session.getAttribute("id"));
+		
 		if(session != null && session.getAttribute("id")!=null){
 			session.invalidate();
 		}
@@ -95,6 +118,10 @@ public class MemberController {
 		String query = null;
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession(false);
+	//	System.out.println("=================hiijong===============");
+		ArrayList<String> idList = new ArrayList<String>();
+	
+	//	System.out.println("==============out==============="+session.getAttribute("id"));
 		String id = null;
 		boolean flag = false;
 		if(session == null){			
@@ -107,6 +134,17 @@ public class MemberController {
 				flag = service.login(id, pwd);
 			}
 			if(flag){
+				/*=============================================*/
+				id = (String)session.getAttribute("id");
+				//System.out.println("==============out: id가 있긴 한가==============="+id);
+				idList = fservice.getFrList_del(id);
+				//System.out.println("==============out: id불러오긴하나==============="+id);
+				idList.add(id);
+				for(int i =0; i<idList.size()-1; i++){
+					fservice.delFr(id, idList.get(i));
+				}
+				/*=============================================*/
+				bservice.delete_id(id);
 				service.delete(id);
 				query = "logout.do";
 				mav.setViewName(view+query);
@@ -125,6 +163,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		Member m = null;
 		HttpSession session = request.getSession(false);
+		//System.out.println("==============update==============="+session.getAttribute("id"));
 		if(session == null){
 			query = "loginForm.do";
 			mav.setViewName(view+query);

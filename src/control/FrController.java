@@ -66,6 +66,7 @@ public class FrController {
 			fList = fservice.getFrList(id);
 			idList = fservice.getFrIdList(id);
 			idList.add(id);
+		
 			articles = bservice.select(idList);
 		}
 		mav.addObject("data", data);
