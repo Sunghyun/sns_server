@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <script>
+	function popup() {
+		javascript: window.open('sns/report/submissionForm.jsp', 'upload',
+				'width=300,height=300,left=0,top=0,resizable=no');
+
+	}
+
 	function a() {
 		pwd1 = prompt("패스워드를 입력하라");
 		f.pwd.value = pwd1;
@@ -52,44 +58,78 @@
 
 
 	<table border="1">
+
 		<tr>
-			<th style="width: 600px;">글목록</th>
+			<th style="width: 600px;"><a
+				href="<%=request.getContextPath()%>/list.do?temp=1">글 목록</a> <a
+				href="<%=request.getContextPath()%>/list.do?temp=2">자료실</a></th>
 			<th>인맥관리</th>
 		</tr>
-		<tr>
-			<td rowspan="3"><a href="/sns_server/writeForm.do">글쓰기</a><br />
-				<table border="1">
-					<tr>
-						<th>글번호</th>
-						<th>작성자</th>
-						<th style="width: 300px;">내용</th>
-						<th>편집</th>
-					</tr>
-					<c:forEach var="a" items="${articles}">
+		<c:if test="${temp=='1'}">
+			<tr>
+				<td rowspan="3"><a href="/sns_server/writeForm.do">글쓰기</a><br />
+					<table border="1">
 						<tr>
-							<td>${a.num}</td>
-							<td>${a.writer_id}</td>
-							<td>${a.content}</td>
-							<td><c:if test="${a.writer_id == sessionScope.id }">
-									<form method="post">
-										<input type="hidden" name="num" value="${a.num}" /> <input
-											type="hidden" name="writer_id" value="${a.writer_id}" /> <input
-											type="hidden" name="content" value="${a.content}" /> <input
-											type="button" value="수정" onclick="d(1, this.form)" /> <input
-											type="button" value="삭제" onclick="d(2, this.form)" />
-									</form>
-								</c:if></td>
+							<th>글번호</th>
+							<th>작성자</th>
+							<th style="width: 300px;">내용</th>
+							<th>편집</th>
 						</tr>
-					</c:forEach>
-				</table>
-				
-				</td>
-			<td>
-				<h3>알 수 있는 사람</h3> <c:forEach var="m" items="${data}">
-					<a href="/sns_server/frInfo.do?id=${m.id }">${m.id }</a>
-					<br />
-				</c:forEach>
-			</td>
+						<c:forEach var="a" items="${articles}">
+							<tr>
+								<td>${a.num}</td>
+								<td>${a.writer_id}</td>
+								<td>${a.content}</td>
+								<td><c:if test="${a.writer_id == sessionScope.id }">
+										<form method="post">
+											<input type="hidden" name="num" value="${a.num}" /> <input
+												type="hidden" name="writer_id" value="${a.writer_id}" /> <input
+												type="hidden" name="content" value="${a.content}" /> <input
+												type="button" value="수정" onclick="d(1,this.form)"/> <input
+												type="button" value="삭제" onclick="d(2,this.form)"/>
+										</form>
+									</c:if></td>
+							</tr>
+						</c:forEach>
+
+					</table>
+		</c:if>
+		<c:if test="${temp=='2'}">
+			<tr>
+				<td rowspan="3"><A href="#" onclick="popup()">업로드</A> <br />
+					<table border="1">
+						<tr>
+							<th>글번호</th>
+							<th>작성자</th>
+							<th style="width: 300px;">내용</th>
+							<th>파일이름</th>
+						</tr>
+						<c:forEach var="a" items="${list}">
+							<tr>
+								<td>${a.num }</td>
+								<td>${a.id }</td>
+								<td>${a.fid}</td>
+								<td>
+									<form method="post">
+										<input type="button" value="다운 " onclick="location.href='<%=request.getContextPath()%>/file.do?list=${a.fid}'" />
+										<c:if test="${a.id == sessionScope.id }">
+											<input type="button" value="삭제 " onclick="location.href='<%=request.getContextPath()%>/filedel.do?fid=${a.fid}'" />
+										</c:if>
+									</form>
+								</td>
+							</tr>
+						</c:forEach>
+
+					</table>
+		</c:if>
+
+		</td>
+		<td>
+			<h3>알 수 있는 사람</h3> <c:forEach var="m" items="${data}">
+				<a href="/sns_server/frInfo.do?id=${m.id }">${m.id }</a>
+				<br />
+			</c:forEach>
+		</td>
 		</tr>
 		<tr>
 			<td>

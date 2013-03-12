@@ -85,6 +85,7 @@ public class MemberController {
 			@RequestParam("pwd") String pwd, HttpSession session) {
 		String query = null;
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("temp","1");   // 처음  list.jps 에 자료실을 나타내기 위해.
 		System.out.println(id);
 		System.out.println(pwd);
 		

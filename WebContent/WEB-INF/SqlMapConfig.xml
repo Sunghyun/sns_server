@@ -7,4 +7,5 @@
 	<sqlMap resource="sns_sqlMap/Member.xml" />
 	<sqlMap resource="sns_sqlMap/Friend.xml" />
 	<sqlMap resource="sns_sqlMap/Board.xml" />
+	<sqlMap resource="sns_sqlMap/FileModel.xml" />
 </sqlMapConfig> 
