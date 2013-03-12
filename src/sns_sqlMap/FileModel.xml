@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"  
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FileModel">
+
+	<resultMap class="model.FileModel" id="MemberResult">
+		<result property="num" column="num"/>
+		<result property="id"  column="ID"/>
+		<result property="fid" column="FID"/>
+		<result property="loc" column="loc"/>
+	</resultMap>
+
+	<insert id="insertMember" parameterClass="model.FileModel">
+		INSERT INTO
+		files 
+		VALUES (file_seq.nextval,#id#,#fid#,#loc#)
+	</insert>
+	
+<!-- 	<select id="selectAll" resultMap="MemberResult"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM files -->
+<!-- 	</select>	 -->
+
+<!-- 변수는 # , 도중에 있는건 $로 붙여서 한다. -->
+	<select id="selectfiles"  parameterClass="String" resultMap="MemberResult">
+			select * 
+			from files 
+			where id = #id# or id IN (select fr_id from friend_$id$ where info1 = 'yes') order by num
+	</select>
+
+	
+	<delete id="deleteMember" parameterClass="String">
+		delete files where fid = #fid#
+	</delete>
+	
+	
+	
+	
+
+<!-- 	<resultMap id="MemberResult" class="model.Member"> -->
+<!-- 		<result column="ID" property="id" /> -->
+<!-- 		<result column="PW" property="pw" /> -->
+<!-- 		<result column="NAME" property="name" /> -->
+<!-- 	</resultMap> -->
+
+<!-- 	<select id="getMember" resultMap="MemberResult"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM MEMBER2 -->
+<!-- 	</select>	 -->
+
+<!-- 	<select id="getMemberInfo" parameterClass="String"  -->
+<!-- 	resultMap="MemberResult"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM MEMBER2 where id = #id# -->
+<!-- 	</select> -->
+<!-- 	<update id="updateMember" parameterClass="model.Member"> -->
+<!-- 		update member2 -->
+<!-- 		set -->
+<!-- 		pw=#pw#, name=#name# -->
+<!-- 		where id=#id# -->
+<!-- 	</update> -->
+<!-- 	<delete id="deleteMember" parameterClass="String"> -->
+<!-- 		delete member2 -->
+<!-- 		where -->
+<!-- 		id=#id# -->
+<!-- 	</delete> -->
+	
+</sqlMap>
+
+
+
+
+
+
+
+
+
+
+
+
